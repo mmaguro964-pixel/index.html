@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="UTF-8">
+
+<style>
+body{
+font-size:80px;
+text-align:center;
+margin-top:40vh;
+font-family:sans-serif;
+background:black;
+color:white;
+}
+</style>
+
+<div id="text"></div>
+
+<script>
+
+function convert(t){
+
+const map={
+kya:"きゃ",kyu:"きゅ",kyo:"きょ",
+sha:"しゃ",shu:"しゅ",sho:"しょ",
+cha:"ちゃ",chu:"ちゅ",cho:"ちょ",
+
+shi:"し",chi:"ち",tsu:"つ",
+
+ka:"か",ki:"き",ku:"く",ke:"け",ko:"こ",
+sa:"さ",su:"す",se:"せ",so:"そ",
+ta:"た",te:"て",to:"と",
+na:"な",ni:"に",nu:"ぬ",ne:"ね",no:"の",
+ha:"は",hi:"ひ",fu:"ふ",he:"へ",ho:"ほ",
+ma:"ま",mi:"み",mu:"む",me:"め",mo:"も",
+ya:"や",yu:"ゆ",yo:"よ",
+ra:"ら",ri:"り",ru:"る",re:"れ",ro:"ろ",
+wa:"わ",wo:"を",
+
+a:"あ",i:"い",u:"う",e:"え",o:"お",
+n:"ん"
+}
+
+Object.keys(map)
+.sort((a,b)=>b.length-a.length)
+.forEach(k=>{
+t=t.replaceAll(k,map[k])
+})
+
+return t
+}
+
+function update(){
+
+const text=decodeURIComponent(location.hash.slice(1))
+
+document.getElementById("text").textContent=
+convert(text)
+
+}
+
+update()
+
+window.addEventListener("hashchange",update)
+
+</script>
