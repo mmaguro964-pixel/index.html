@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="UTF-8">
+
+<style>
+body{
+font-size:80px;
+text-align:center;
+margin-top:40vh;
+background:black;
+color:white;
+}
+</style>
+
+<div id="text"></div>
+
+<script>
+
+function romajiToHiragana(input){
+
+const table={
+kya:"きゃ",kyu:"きゅ",kyo:"きょ",
+sha:"しゃ",shu:"しゅ",sho:"しょ",
+cha:"ちゃ",chu:"ちゅ",cho:"ちょ",
+
+shi:"し",chi:"ち",tsu:"つ",
+
+ka:"か",ki:"き",ku:"く",ke:"け",ko:"こ",
+sa:"さ",su:"す",se:"せ",so:"そ",
+ta:"た",te:"て",to:"と",
+na:"な",ni:"に",nu:"ぬ",ne:"ね",no:"の",
+ha:"は",hi:"ひ",fu:"ふ",he:"へ",ほ:"ho",
+ma:"ま",mi:"み",mu:"む",me:"め",mo:"も",
+ya:"や",yu:"ゆ",yo:"よ",
+ra:"ら",ri:"り",ru:"る",re:"れ",ro:"ろ",
+wa:"わ",wo:"を",
+
+ga:"が",gi:"ぎ",gu:"ぐ",ge:"げ",go:"ご",
+za:"ざ",ji:"じ",zu:"ず",ze:"ぜ",zo:"ぞ",
+da:"だ",de:"で",do:"ど",
+ba:"ば",bi:"び",bu:"ぶ",be:"べ",bo:"ぼ",
+pa:"ぱ",pi:"ぴ",pu:"ぷ",pe:"ぺ",po:"ぽ",
+
+a:"あ",i:"い",u:"う",e:"え",o:"お",
+
+n:"ん"
+}
+
+let result=""
+let i=0
+
+while(i<input.length){
+
+// っ
+if(input[i]==input[i+1] && /[bcdfghjklmpqrstvwxyz]/.test(input[i])){
+result+="っ"
+i++
+continue
+}
+
+// 3文字
+let chunk=input.slice(i,i+3)
+if(table[chunk]){
+result+=table[chunk]
+i+=3
+continue
+}
+
+// 2文字
+chunk=input.slice(i,i+2)
+if(table[chunk]){
+result+=table[chunk]
+i+=2
+continue
+}
+
+// 1文字
+chunk=input.slice(i,i+1)
+if(table[chunk]){
+result+=table[chunk]
+i+=1
+continue
+}
+
+result+=chunk
+i++
+
+}
+
+return result
+
+}
+
+function update(){
+
+const text=decodeURIComponent(location.hash.slice(1))
+
+document.getElementById("text").textContent =
+romajiToHiragana(text)
+
+}
+
+update()
+window.addEventListener("hashchange",update)
+
+</script>
