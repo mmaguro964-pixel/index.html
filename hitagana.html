@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="UTF-8">
+
+<style>
+body{
+font-size:80px;
+text-align:center;
+margin-top:40vh;
+background:black;
+color:white;
+font-family:sans-serif;
+}
+</style>
+
+<div id="text"></div>
+
+<script src="https://unpkg.com/wanakana"></script>
+
+<script>
+
+function update(){
+
+const text=decodeURIComponent(location.hash.slice(1))
+
+document.getElementById("text").textContent =
+wanakana.toHiragana(text)
+
+}
+
+update()
+
+window.addEventListener("hashchange",update)
+
+</script>
